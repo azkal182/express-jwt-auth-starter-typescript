@@ -1,13 +1,15 @@
 import express from "express";
-import userController from "../controller/user-controller";
+import authController from "../controller/auth-controller";
 
 const publicRouter = express.Router();
-publicRouter.post('/api/users/register', userController.register);
-publicRouter.post('/api/users/login', userController.login);
-publicRouter.get('/', (req, res) => {
-    res.send("oke")
-})
+publicRouter.post("/api/auth/register", authController.register);
+publicRouter.post("/api/auth/login", authController.login);
 
-export {
-    publicRouter
-}
+// refresh token
+publicRouter.get("/api/auth/refresh", authController.refreshAccessToken);
+
+publicRouter.get("/", (req, res) => {
+  res.send("oke");
+});
+
+export { publicRouter };

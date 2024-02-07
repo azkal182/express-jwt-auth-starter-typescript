@@ -1,27 +1,34 @@
-import { Request, Response, NextFunction } from "express";
+import { NextFunction, Request, Response } from "express";
 import userService from "../service/user-service";
-const register = async (req: Request, res: Response, next: NextFunction) => {
-    try {
-        const result = await userService.register(req.body);
-        res.status(200).json({
-            data: result
-        });
-    } catch (e) {
-        next(e);
-    }
-}
 
-const login = async (req: Request, res: Response, next: NextFunction) => {
-    try {
-        const result = await userService.login(req.body);
-        res.status(200).json({
-            data: result
-        });
-    } catch (e) {
-        next(e);
-    }
-}
+const getMeHandler = (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const user = res.locals.user;
+    res.status(200).json({
+      status: "success",
+      data: {
+        user,
+      },
+    });
+  } catch (err: any) {
+    next(err);
+  }
+};
+
+const getAllUser = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const user = await userService.getAllUser();
+    res.status(200).json({
+      status: "success",
+      data: {
+        user,
+      },
+    });
+  } catch (err: any) {
+    next(err);
+  }
+};
 export default {
-    register,
-    login
-}
+  getMeHandler,
+  getAllUser,
+};
