@@ -61,13 +61,11 @@ const refreshAccessToken = async (
 ) => {
   try {
     let refresh_token;
-    if (
-      req.headers.authorization &&
-      req.headers.authorization.startsWith("Bearer")
-    ) {
-      refresh_token = req.headers.authorization.split(" ")[1];
-    } else if (req.cookies.refresh_token) {
+    console.log(req.query);
+    if (req.cookies.refresh_token) {
       refresh_token = req.cookies.refresh_token;
+    } else if (req.query && req.query.refresh_token) {
+      refresh_token = req.query.refresh_token;
     }
 
     if (!refresh_token) {

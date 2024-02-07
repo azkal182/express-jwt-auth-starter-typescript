@@ -56,12 +56,12 @@ const login = (req, res, next) => __awaiter(void 0, void 0, void 0, function* ()
 const refreshAccessToken = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         let refresh_token;
-        if (req.headers.authorization &&
-            req.headers.authorization.startsWith("Bearer")) {
-            refresh_token = req.headers.authorization.split(" ")[1];
-        }
-        else if (req.cookies.refresh_token) {
+        console.log(req.query);
+        if (req.cookies.refresh_token) {
             refresh_token = req.cookies.refresh_token;
+        }
+        else if (req.query && req.query.refresh_token) {
+            refresh_token = req.query.refresh_token;
         }
         if (!refresh_token) {
             return next(new response_error_1.ResponseError(401, "You are not logged in"));
