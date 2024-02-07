@@ -20,7 +20,9 @@
     "@types/lodash": "^4.14.202",
     "@types/node": "^20.11.16",
     "nodemon": "^3.0.3",
+    "pre-commit": "^1.2.2",
     "prisma": "^5.9.1",
+    "rimraf": "^5.0.5",
     "ts-node": "^10.9.2",
     "typescript": "^5.3.3"
   },
