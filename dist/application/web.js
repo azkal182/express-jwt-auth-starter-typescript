@@ -12,9 +12,11 @@ const error_middleware_1 = require("../middleware/error-middleware");
 const api_1 = require("../route/api");
 const cookie_parser_1 = __importDefault(require("cookie-parser"));
 const cors_1 = __importDefault(require("cors"));
+const moment_timezone_1 = __importDefault(require("moment-timezone"));
 exports.web = (0, express_1.default)();
 exports.web.use(express_1.default.json());
 exports.web.use((0, cookie_parser_1.default)());
+moment_timezone_1.default.tz.setDefault("Asia/Jakarta");
 exports.web.use((0, cors_1.default)({
     origin: process.env.ORIGIN,
     credentials: true,

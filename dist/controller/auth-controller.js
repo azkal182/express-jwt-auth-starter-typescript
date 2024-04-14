@@ -30,6 +30,7 @@ const refreshTokenCookieOptions = {
 const register = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const result = yield auth_service_1.default.register(req.body);
+        console.log({ result });
         res.status(200).json({
             data: result,
         });

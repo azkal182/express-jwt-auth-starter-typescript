@@ -42,10 +42,12 @@ const signToken = async (user: Prisma.UserSelect) => {
 
 const register = async (request: any) => {
   const data = validate(registerUserValidation, request);
+  console.log({ data });
 
   try {
     data.password = hashSync(data.password, 10);
     const user = await prismaClient.user.create({ data });
+    console.log(user);
     return omit(user, ["password"]);
   } catch (err: any) {
     if (err.code === "P2002") {
@@ -54,6 +56,8 @@ const register = async (request: any) => {
         "There is a unique constraint violation, a new user cannot be created with this username"
       );
     }
+
+    console.log(err);
   }
 
   // const countUser = await prismaClient.user.count({

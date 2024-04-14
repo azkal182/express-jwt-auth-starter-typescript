@@ -42,15 +42,18 @@ const signToken = (user) => __awaiter(void 0, void 0, void 0, function* () {
 });
 const register = (request) => __awaiter(void 0, void 0, void 0, function* () {
     const data = (0, validation_1.validate)(user_validation_1.registerUserValidation, request);
+    console.log({ data });
     try {
         data.password = (0, bcryptjs_1.hashSync)(data.password, 10);
         const user = yield database_1.prismaClient.user.create({ data });
+        console.log(user);
         return (0, lodash_1.omit)(user, ["password"]);
     }
     catch (err) {
         if (err.code === "P2002") {
             throw new response_error_1.ResponseError(409, "There is a unique constraint violation, a new user cannot be created with this username");
         }
+        console.log(err);
     }
     // const countUser = await prismaClient.user.count({
     //     where: {

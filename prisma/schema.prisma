@@ -5,6 +5,12 @@ generator client {
     provider = "prisma-client-js"
 }
 
+// if use postgres
+// datasource db {
+//     provider = "postgresql"
+//     url      = env("DATABASE_URL")
+// }
+
 datasource db {
     provider = "cockroachdb"
     url      = env("DATABASE_URL_COCKROACH")
